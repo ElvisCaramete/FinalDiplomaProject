@@ -1,6 +1,8 @@
 package com.project.diploma.elvis.diplomaproject.Settings;
 
 import android.Manifest;
+import android.accounts.Account;
+import android.accounts.AccountManager;
 import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -14,8 +16,10 @@ import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.project.diploma.elvis.diplomaproject.R;
+
+import static com.project.diploma.elvis.diplomaproject.Main.MainActivity.LOGIN;
+
 public class SettingsActivity extends AppCompatActivity {
 
     public static final String SHARED_PREFS = "shared_prefs";
@@ -63,17 +67,41 @@ public class SettingsActivity extends AppCompatActivity {
 
         if(!userName.getText().equals("User undefined!")) {
             logIn.setText("Log Out");
-            logIn.setOnClickListener(new View.OnClickListener() {
-                @SuppressLint("MissingPermission")
-                @Override
-                public void onClick(View v) {
-                    //Log out function
-                }
-            });
         }else{
             logIn.setVisibility(View.INVISIBLE);
         }
+
+        logIn.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("MissingPermission")
+            @Override
+            public void onClick(View v) {
+                deleteAllAppAccounts();
+            }
+        });
     }
+
+    public void deleteAllAppAccounts() {
+        try {
+            AccountManager am = AccountManager.get(getApplicationContext());
+            Account[] accounts = am.getAccountsByType("com.google");
+            for (Account a : accounts) {
+                System.out.println("Account remmoved ? "+a.name);
+                //am.removeAccount(a,null, null);
+            }
+            SharedPreferences pref = getApplicationContext().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+            SharedPreferences.Editor editor = pref.edit();
+            editor.putBoolean(LOGIN, true);
+            editor.putString(USERNAME_TAG,null);
+            editor.apply();
+            logIn.setVisibility(View.INVISIBLE);
+            userName.setText("User undefined!");
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
 
     public void saveData(){
@@ -97,10 +125,10 @@ public class SettingsActivity extends AppCompatActivity {
     public void updateView(){
         switch1.setChecked(switchOnOff);
         permissionText.setText(permission_text);
-        if(!getUsername.equals("User undefined!"))
+        if(!getUsername.equals("User undefined!") && getUsername.length()>10)
             userName.setText(getUsername.substring(0,getUsername.length()-10).toUpperCase());
         else
-            userName.setText(getUsername);
+            userName.setText("User undefined!");
     }
 
     private void checkPhoneState(){

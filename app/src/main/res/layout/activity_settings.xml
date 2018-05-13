@@ -8,7 +8,6 @@
     android:weightSum="1"
     tools:context="com.project.diploma.elvis.diplomaproject.Settings.SettingsActivity">
 
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -32,7 +31,8 @@
             android:layout_gravity=""
             android:layout_marginRight="20sp"
             android:text="User undefined!"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:layout_marginEnd="20sp" />
 
         <Button
             android:id="@+id/logIn"

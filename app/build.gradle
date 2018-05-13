@@ -4,7 +4,7 @@ android {
     compileSdkVersion 25
     buildToolsVersion '27.0.3'
     defaultConfig {
-        applicationId "com.upt.cti.msaproject"
+        applicationId "com.project.diploma.elvis.diplomaproject"
         minSdkVersion 16
         targetSdkVersion 25
         versionCode 1

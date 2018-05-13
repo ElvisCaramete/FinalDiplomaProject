@@ -3,14 +3,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.project.diploma.elvis.diplomaproject">
 
-    <uses-permission
-        android:name="android.permission.MANAGE_ACCOUNTS"
-        android:maxSdkVersion="22" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+    <uses-permission android:name="android.permission.READ_SYNC_SETTINGS" />
+    <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS" />
+    <uses-permission android:name="android.permission.READ_SYNC_STATS" />
+
+    <uses-permission android:name="android.permission.READ_CALENDAR"/>
+    <uses-permission android:name="android.permission.WRITE_CALENDAR"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+
+    <!-- client -->
+    <uses-permission android:name="android.permission.USE_CREDENTIALS"/>
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS"/>
+
+    <!-- Authenticator -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS"/>
 
     <application
         android:allowBackup="true"
@@ -19,7 +37,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name="com.project.diploma.elvis.diplomaproject.Main.MainActivity">
+        <activity android:name=".Main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,8 +45,9 @@
             </intent-filter>
         </activity>
 
+
         <receiver
-            android:name="com.project.diploma.elvis.diplomaproject.Utils.InterceptCall"
+            android:name=".Utils.InterceptCall"
             android:directBootAware="true"
             android:exported="true"
             tools:targetApi="n">
@@ -37,9 +56,10 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name="com.project.diploma.elvis.diplomaproject.Whitelist.WhiteListActivity" />
-        <activity android:name="com.project.diploma.elvis.diplomaproject.Whitelist.AddToWhitelistActivity" />
-        <activity android:name="com.project.diploma.elvis.diplomaproject.Settings.SettingsActivity" />
+        <activity android:name=".Whitelist.WhiteListActivity" />
+        <activity android:name=".Whitelist.AddToWhitelistActivity" />
+        <activity android:name=".Settings.SettingsActivity" />
+
     </application>
 
 </manifest>

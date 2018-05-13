@@ -62,9 +62,10 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
     static final int REQUEST_PERMISSION_GET_ACCOUNTS = 1003;
     private static final String USERNAME_TAG = "username_tag";
 
-    private static final String PREF_ACCOUNT_NAME = "accountName";
+    public static final String PREF_ACCOUNT_NAME = "accountName";
+    public static final String LOGIN = "login";
     private static final String[] SCOPES = { CalendarScopes.CALENDAR_READONLY };
-    private Button logIn;
+    public Button logIn;
     private AccountManager mAccountManager;
 
     @SuppressLint("WrongConstant")
@@ -79,6 +80,9 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
         logIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SharedPreferences pref = getApplicationContext().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+                String username = pref.getString(USERNAME_TAG,null);
+                System.out.println("USERNAME :"+username);
                 getResultsFromApi();
 
             }
@@ -108,6 +112,15 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
                 .setBackOff(new ExponentialBackOff());
 
         getResultsFromApi();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SharedPreferences pref = getApplicationContext().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        System.out.println(pref.getBoolean(LOGIN, false));
+        if(pref.getBoolean(LOGIN, false))
+            logIn.setVisibility(View.VISIBLE);
     }
 
     private boolean checkAccount() {
@@ -167,7 +180,8 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
                     this,
                     "This app needs to access your Google account (via Contacts).",
                     REQUEST_PERMISSION_GET_ACCOUNTS,
-                    Manifest.permission.GET_ACCOUNTS, Manifest.permission.READ_PHONE_STATE);
+                    Manifest.permission.GET_ACCOUNTS,
+                    Manifest.permission.READ_PHONE_STATE);
         }
     }
 
