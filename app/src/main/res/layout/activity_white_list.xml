@@ -1,0 +1,56 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/in_app_background"
+    android:orientation="vertical" >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="0.7"
+        android:layout_gravity="top|center_horizontal"
+        android:layout_marginBottom="20dip"
+        android:layout_margin="5sp"
+        android:text="WHITELIST"
+        android:textSize="25sp" />
+
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"
+        android:orientation="vertical"
+        android:padding="10dip">
+
+        <ListView
+            android:id="@+id/listview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </TableLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.9"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:layout_gravity="center_horizontal">
+
+
+        <Button
+            android:id="@+id/add_blacklist_btn"
+            style="@android:style/Widget.DeviceDefault.Light.Button.Toggle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Add manually phone number" />
+
+        <Button
+            android:id="@+id/contact_list"
+            style="@android:style/Widget.DeviceDefault.Light.Button.Toggle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Choose phone number from contact list" />
+    </LinearLayout>
+
+</LinearLayout>
