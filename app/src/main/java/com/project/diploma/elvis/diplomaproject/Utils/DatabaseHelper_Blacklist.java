@@ -8,18 +8,18 @@ import android.database.sqlite.SQLiteOpenHelper;
  * Created by Elvis on 1/1/2018.
  */
 
-public class DatabaseHelper extends SQLiteOpenHelper {
+public class DatabaseHelper_Blacklist extends SQLiteOpenHelper {
 
-    private static final String DATABASE_NAME = "whitelist.db";
+    private static final String DATABASE_NAME = "blacklist.db";
 
     private static final int DATABASE_VERSION = 1;
 
-    public static final String TABLE_WHITELIST = "whitelist";
+    public static final String TABLE_BLACKLIST = "blacklist";
 
-    private static final String TABLE_CREATE = "create table "  + TABLE_WHITELIST + "( id "
+    private static final String TABLE_CREATE = "create table "  + TABLE_BLACKLIST + "( id "
             + " integer primary key autoincrement, name text not null, phone_number  text not null);";
 
-    public DatabaseHelper(Context context) {
+    public DatabaseHelper_Blacklist(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 

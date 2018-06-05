@@ -11,7 +11,7 @@
         android:layout_gravity="top|center_horizontal"
         android:layout_marginBottom="20dip"
         android:layout_margin="5sp"
-        android:text="WHITELIST"
+        android:text="BLACKLIST"
         android:textSize="25sp" />
 
     <TableLayout
@@ -37,7 +37,7 @@
 
 
         <Button
-            android:id="@+id/add_whitelist_btn"
+            android:id="@+id/add_blacklist_btn"
             style="@android:style/Widget.DeviceDefault.Light.Button.Toggle"
             android:layout_width="0dp"
             android:layout_height="match_parent"

@@ -11,38 +11,11 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="top|left"
+        android:layout_gravity="top|center"
         android:layout_margin="5sp"
         android:text="Settings"
         android:textSize="30sp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:orientation="horizontal"
-        android:padding="20sp">
-
-
-        <TextView
-            android:id="@+id/user"
-            android:layout_width="220sp"
-            android:layout_height="50sp"
-            android:layout_gravity=""
-            android:layout_marginRight="20sp"
-            android:text="User undefined!"
-            android:textSize="20sp"
-            android:layout_marginEnd="20sp" />
-
-        <Button
-            android:id="@+id/logIn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity=""
-            android:text="Log In"
-            android:textSize="13sp" />
-
-    </LinearLayout>
 
     <TextView
         android:id="@+id/textView"
@@ -96,6 +69,32 @@
             android:layout_height="wrap_content"
             android:layout_gravity="" />
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="20sp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="UPCOMING GOOGLE CALENDAR EVENTS"
+            android:layout_gravity="center_horizontal"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            />
+        <TextView
+            android:id="@+id/calendarEvents"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:maxLines="100"
+            android:scrollbars="vertical"
+            android:padding="@dimen/fab_margin"
+            android:text="No upcoming meetings set in google calendar."
+            android:layout_gravity="center_horizontal"/>
     </LinearLayout>
 
 

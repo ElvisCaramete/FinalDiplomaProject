@@ -5,4 +5,6 @@
     <string name="about">About</string>
     <string name="logtab">Logtab</string>
     <string name="logIn">Log In</string>
+    <string name="blacklist">BLACKLIST</string>
+    <string name="permissionGranted">Permissions granted!</string>
 </resources>

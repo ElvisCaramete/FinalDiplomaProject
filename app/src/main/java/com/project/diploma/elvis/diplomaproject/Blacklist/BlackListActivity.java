@@ -1,4 +1,4 @@
-package com.project.diploma.elvis.diplomaproject.Whitelist;
+package com.project.diploma.elvis.diplomaproject.Blacklist;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -21,8 +21,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.project.diploma.elvis.diplomaproject.Utils.DatabaseUtility;
 import com.project.diploma.elvis.diplomaproject.R;
+import com.project.diploma.elvis.diplomaproject.Utils.DatabaseUtility_Blacklist;
 
 import java.util.List;
 
@@ -30,17 +30,17 @@ import java.util.List;
  * Created by Elvis on 1/1/2018.
  */
 
-public class WhiteListActivity extends AppCompatActivity implements View.OnClickListener {
+public class BlackListActivity extends AppCompatActivity implements View.OnClickListener {
 
 
-    private Button add_to_whitelist;
+    private Button add_to_blacklist;
     private Button contact_list;
     public ListView listview;
-    private DatabaseUtility whitelist_utils;
-    public static List<Whitelist> whitelist;
+    private DatabaseUtility_Blacklist blacklist_utils;
+    public static List<Blacklist> blacklist;
 
-    public static final String WHITELIST_PREF = "whitelist_pref";
-    String[] whiteListNo = new String[10];
+    public static final String BLACKLIST_PREF = "blacklist_pref";
+    String[] blacklistNO = new String[10];
 
 
 
@@ -50,26 +50,26 @@ public class WhiteListActivity extends AppCompatActivity implements View.OnClick
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_white_list);
+        setContentView(R.layout.activity_black_list);
 
-        add_to_whitelist = (Button) findViewById(R.id.add_whitelist_btn);
+        add_to_blacklist = (Button) findViewById(R.id.add_blacklist_btn);
         contact_list = (Button) findViewById(R.id.contact_list);
 
         contact_list.setOnClickListener(this);
-        add_to_whitelist.setOnClickListener(this);
+        add_to_blacklist.setOnClickListener(this);
 
         listview = (ListView) findViewById(R.id.listview);
 
 
         final LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         assert inflater != null;
-        final View rowView = inflater.inflate(R.layout.white_list_item, listview, false);
+        final View rowView = inflater.inflate(R.layout.black_list_item, listview, false);
         listview.addHeaderView(rowView);
     }
 
     @SuppressLint("SetTextI18n")
     private void noRecord() {
-        if (whitelist.size() == 0) {
+        if (blacklist.size() == 0) {
             final TextView noRecord = new TextView(this);
             noRecord.setTextSize(30);
             noRecord.setGravity(1);
@@ -81,9 +81,9 @@ public class WhiteListActivity extends AppCompatActivity implements View.OnClick
 
     @Override
     public void onClick(View v) {
-        if (v == add_to_whitelist) {
-            Intent myIntent = new Intent(WhiteListActivity.this, AddToWhitelistActivity.class);
-            WhiteListActivity.this.startActivity(myIntent);
+        if (v == add_to_blacklist) {
+            Intent myIntent = new Intent(BlackListActivity.this, AddToBlacklistActivity.class);
+            BlackListActivity.this.startActivity(myIntent);
         }
         if (v == contact_list) {
             Intent pickContactIntent = new Intent(Intent.ACTION_PICK, Uri.parse("content://contacts"));
@@ -115,35 +115,30 @@ public class WhiteListActivity extends AppCompatActivity implements View.OnClick
                 String name = cursor.getString(contactName);
 
                 Toast.makeText(getApplicationContext(), number + name, Toast.LENGTH_LONG).show();
-                final Whitelist phone = new Whitelist();
+                final Blacklist phone = new Blacklist();
 
                 phone.name = name;
                 phone.phoneNumber = number;
 
-                whitelist_utils.create(phone);
+                blacklist_utils.create(phone);
             }
         }
     }
-
-    //private String convertPhoneNumber(String number){
-    //    return number.replaceAll("[^0-9]","");
-    //}
-
     @Override
     protected void onResume() {
         super.onResume();
-        whitelist_utils = new DatabaseUtility(this);
-        whitelist = whitelist_utils.getWhitelistRecords();
+        blacklist_utils = new DatabaseUtility_Blacklist(this);
+        blacklist = blacklist_utils.getBlacklistRecords();
         if (listview.getChildCount() > 1)
             listview.removeFooterView(listview.getChildAt(listview.getChildCount() - 1));
-        listview.setAdapter(new CustomAdapter(this, R.layout.white_list_item, whitelist));
+        listview.setAdapter(new CustomAdapter(this, R.layout.black_list_item, blacklist));
         noRecord();
     }
 
     public class CustomAdapter extends ArrayAdapter<String> {
 
         private LayoutInflater inflater;
-        private List<Whitelist> records;
+        private List<Blacklist> records;
 
         CustomAdapter(Context context, int resource, @SuppressWarnings("rawtypes") List objects) {
             super(context, resource, objects);
@@ -157,9 +152,9 @@ public class WhiteListActivity extends AppCompatActivity implements View.OnClick
         public View getView(final int position, View view, @NonNull ViewGroup parent) {
 
             if (view == null)
-                view = inflater.inflate(R.layout.white_list_item, parent, false);
+                view = inflater.inflate(R.layout.black_list_item, parent, false);
 
-            final Whitelist phoneNumber = records.get(position);
+            final Blacklist phoneNumber = records.get(position);
 
             ((TextView) view.findViewById(R.id.name)).setText(phoneNumber.name);
             ((TextView) view.findViewById(R.id.phone_number)).setText(phoneNumber.phoneNumber);
@@ -171,8 +166,8 @@ public class WhiteListActivity extends AppCompatActivity implements View.OnClick
             deleteImageView.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     try {
-                        whitelist_utils.delete(whitelist.get(position));
-                        whitelist.remove(position);
+                        blacklist_utils.delete(blacklist.get(position));
+                        blacklist.remove(position);
                         listview.invalidateViews();
                         noRecord();
                     } catch (Exception e) {
@@ -180,14 +175,14 @@ public class WhiteListActivity extends AppCompatActivity implements View.OnClick
                     }
                 }
             });
-            for(int i=0;i< whitelist.size();i++) {
-                whiteListNo[i]=whitelist.get(i).getPhoneNumber();
+            for(int i=0;i< blacklist.size();i++) {
+                blacklistNO[i]=blacklist.get(i).getPhoneNumber();
             }
-            SharedPreferences mPrefs = getApplicationContext().getSharedPreferences(WHITELIST_PREF,MODE_PRIVATE);
+            SharedPreferences mPrefs = getApplicationContext().getSharedPreferences(BLACKLIST_PREF,MODE_PRIVATE);
             SharedPreferences.Editor prefsEditor = mPrefs.edit();
             Gson gson = new Gson();
-            String json = gson.toJson(whiteListNo);
-            prefsEditor.putString("WhiteList", json);
+            String json = gson.toJson(blacklistNO);
+            prefsEditor.putString("Blacklist", json);
             prefsEditor.apply();
             return view;
         }

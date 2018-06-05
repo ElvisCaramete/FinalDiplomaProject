@@ -34,14 +34,14 @@ public class DatabaseUtility {
         dbHelper.close();
     }
 
-    public Whitelist create(final Whitelist blackList) {
+    public Whitelist create(final Whitelist whiteList) {
 
         final ContentValues values = new ContentValues();
-        values.put("phone_number", blackList.phoneNumber);
-        values.put("name", blackList.name);
+        values.put("phone_number", whiteList.phoneNumber);
+        values.put("name", whiteList.name);
         final long id = database.insert(DatabaseHelper.TABLE_WHITELIST , null, values);
-        blackList.id = id;
-        return blackList;
+        whiteList.id = id;
+        return whiteList;
     }
 
     public void delete(final Whitelist whitelist) {
