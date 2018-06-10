@@ -16,7 +16,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".Main.MainActivity">
+        <activity android:name=".Main.MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -40,6 +41,7 @@
         <activity android:name=".Settings.SettingsActivity" />
         <activity android:name=".Blacklist.BlackListActivity" />
         <activity android:name=".Blacklist.AddToBlacklistActivity"/>
+        <activity android:name=".Settings.TimeFragment" />
 
     </application>
 

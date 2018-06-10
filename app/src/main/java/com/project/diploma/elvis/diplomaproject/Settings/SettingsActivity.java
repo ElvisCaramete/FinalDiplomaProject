@@ -2,6 +2,7 @@ package com.project.diploma.elvis.diplomaproject.Settings;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -9,7 +10,9 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
+import android.view.View;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,6 +37,7 @@ public class SettingsActivity extends AppCompatActivity {
     private Switch switch1;
     private TextView permissionText;
     private TextView calendarEvents;
+    private LinearLayout fragmentTime;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -44,11 +48,18 @@ public class SettingsActivity extends AppCompatActivity {
         calendarEvents = (TextView) findViewById(R.id.calendarEvents);
         switch1 = (Switch) findViewById(R.id.switch1);
         permissionText = (TextView) findViewById(R.id.textView);
-
+        fragmentTime = (LinearLayout) findViewById(R.id.fragmentID);
 
         loadData();
         updateView();
 
+        fragmentTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(SettingsActivity.this, TimeFragment.class);
+                SettingsActivity.this.startActivity(myIntent);
+            }
+        });
 
         switch1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -98,10 +109,17 @@ public class SettingsActivity extends AppCompatActivity {
             for (String event : SyncCalendarEvents.returnCalendarEvent(getApplicationContext())) {
                 finEvent += event;
             }
-            calendarEvents.setText(finEvent);
-            calendarEvents.setTextSize(16);
+            if (finEvent.isEmpty()) {
+                calendarEvents.setText(R.string.noUpcomingMeetings);
+                calendarEvents.setTextSize(16);
+                System.out.println("finEvent empty");
+            } else {
+                System.out.println("FinEvent" + finEvent + "endFinEvent");
+                calendarEvents.setText(finEvent);
+                calendarEvents.setTextSize(16);
+            }
         } else
-            calendarEvents.setText("Calendar permissions not granted!");
+            calendarEvents.setText(R.string.calendarPermissionsNotGranted);
         System.out.println("Update View: " + switchOnOff + " " + permission_text);
     }
 
@@ -143,9 +161,9 @@ public class SettingsActivity extends AppCompatActivity {
                     if (cnt == grantResults.length - 1) {
                         System.out.println("onRequestPermissionsResult: set switch true and text granted\n");
                         switch1.setChecked(true);
-                        System.out.println("Switch: "+switch1.isChecked());
+                        System.out.println("Switch: " + switch1.isChecked());
                         permissionText.setText(R.string.permissionGranted);
-                        System.out.println("Text: "+permissionText.getText());
+                        System.out.println("Text: " + permissionText.getText());
 
                         if (checkCalendarPermission())
                             calendarEvents.setText(Arrays.toString(SyncCalendarEvents.returnCalendarEvent(getApplicationContext()).toArray()));

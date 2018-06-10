@@ -2,9 +2,18 @@
     <string name="app_name">Diploma Project</string>
     <string name="whitelist">WHITELIST</string>
     <string name="settings">Settings</string>
-    <string name="about">About</string>
+    <string name="instructions">Instructions</string>
     <string name="logtab">Logtab</string>
     <string name="logIn">Log In</string>
     <string name="blacklist">BLACKLIST</string>
     <string name="permissionGranted">Permissions granted!</string>
+    <string name="call_blocking_system">Call Blocking System</string>
+    <string name="permissions_not_granted">Permissions not granted!</string>
+    <string name="block_incoming_calls">Block incoming calls</string>
+    <string name="quite_hours">Quite hours</string>
+    <string name="upcoming_google_calendar_events">UPCOMING GOOGLE CALENDAR EVENTS</string>
+    <string name="no_upcoming_meetings_set_in_google_calendar">No upcoming meetings set in google calendar.</string>
+    <string name="calendarPermissionsNotGranted">Calendar permissions not granted!</string>
+    <string name="noUpcomingMeetings">No upcoming meetings set in calendar.</string>
+    <string name="click_to_set">Click to set.</string>
 </resources>
